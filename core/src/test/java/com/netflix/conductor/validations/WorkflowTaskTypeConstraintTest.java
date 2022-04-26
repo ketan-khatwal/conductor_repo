@@ -577,6 +577,35 @@ public class WorkflowTaskTypeConstraintTest {
         assertEquals(0, result.size());
     }
 
+    @Test
+    public void testWorkflowTaskTypeGoto() {
+        WorkflowTask workflowTask = createSampleWorkflowTask();
+        workflowTask.setType("GOTO");
+        workflowTask.setGotoTask("testTask");
+
+        when(mockMetadataDao.getTaskDef(anyString())).thenReturn(new TaskDef());
+
+        Set<ConstraintViolation<WorkflowTask>> result = validator.validate(workflowTask);
+        assertEquals(0, result.size());
+    }
+
+    @Test
+    public void testWorkflowTaskTypeGotoWithGotoTaskMissing() {
+        WorkflowTask workflowTask = createSampleWorkflowTask();
+        workflowTask.setType("GOTO");
+
+        when(mockMetadataDao.getTaskDef(anyString())).thenReturn(new TaskDef());
+
+        Set<ConstraintViolation<WorkflowTask>> result = validator.validate(workflowTask);
+        assertEquals(1, result.size());
+
+        List<String> validationErrors = new ArrayList<>();
+
+        result.forEach(e -> validationErrors.add(e.getMessage()));
+
+        assertTrue(validationErrors.contains("gotoTask should have a task reference name for taskType: GOTO taskName: encode"));
+    }
+
     private List<String> getErrorMessages(WorkflowTask workflowTask) {
         Set<ConstraintViolation<WorkflowTask>> result = validator.validate(workflowTask);
         List<String> validationErrors = new ArrayList<>();

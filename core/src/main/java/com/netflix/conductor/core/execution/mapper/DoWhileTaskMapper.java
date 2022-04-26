@@ -107,7 +107,7 @@ public class DoWhileTaskMapper implements TaskMapper {
         List<TaskModel> tasks2 =
                 taskMapperContext
                         .getDeciderService()
-                        .getTasksToBeScheduled(workflowInstance, loopOverTasks.get(0), retryCount);
+                        .getTasksToBeScheduled(workflowInstance, loopOverTasks.get(0), retryCount, 0);
         tasks2.forEach(
                 t -> {
                     t.setReferenceTaskName(

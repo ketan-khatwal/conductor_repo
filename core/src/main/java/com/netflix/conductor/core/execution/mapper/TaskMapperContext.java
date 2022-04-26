@@ -29,6 +29,7 @@ public class TaskMapperContext {
     private final Map<String, Object> taskInput;
     private final int retryCount;
     private final String retryTaskId;
+    private int iterationCount;
     private final String taskId;
     private final DeciderService deciderService;
 
@@ -38,6 +39,7 @@ public class TaskMapperContext {
         taskToSchedule = builder.taskToSchedule;
         taskInput = builder.taskInput;
         retryCount = builder.retryCount;
+        iterationCount = builder.iterationCount;
         retryTaskId = builder.retryTaskId;
         taskId = builder.taskId;
         deciderService = builder.deciderService;
@@ -55,6 +57,7 @@ public class TaskMapperContext {
         builder.taskToSchedule = copy.getTaskToSchedule();
         builder.taskInput = copy.getTaskInput();
         builder.retryCount = copy.getRetryCount();
+        builder.iterationCount = copy.getIterationCount();
         builder.retryTaskId = copy.getRetryTaskId();
         builder.taskId = copy.getTaskId();
         builder.deciderService = copy.getDeciderService();
@@ -79,6 +82,10 @@ public class TaskMapperContext {
 
     public int getRetryCount() {
         return retryCount;
+    }
+
+    public int getIterationCount() {
+        return iterationCount;
     }
 
     public String getRetryTaskId() {
@@ -110,6 +117,8 @@ public class TaskMapperContext {
                 + taskInput
                 + ", retryCount="
                 + retryCount
+                + ", iterationCount="
+                + iterationCount
                 + ", retryTaskId='"
                 + retryTaskId
                 + '\''
@@ -131,6 +140,9 @@ public class TaskMapperContext {
         TaskMapperContext that = (TaskMapperContext) o;
 
         if (getRetryCount() != that.getRetryCount()) {
+            return false;
+        }
+        if (getIterationCount() != that.getIterationCount()) {
             return false;
         }
         if (!getWorkflowDefinition().equals(that.getWorkflowDefinition())) {
@@ -160,6 +172,7 @@ public class TaskMapperContext {
         result = 31 * result + getTaskToSchedule().hashCode();
         result = 31 * result + getTaskInput().hashCode();
         result = 31 * result + getRetryCount();
+        result = 31 * result + getIterationCount();
         result = 31 * result + (getRetryTaskId() != null ? getRetryTaskId().hashCode() : 0);
         result = 31 * result + getTaskId().hashCode();
         return result;
@@ -174,6 +187,7 @@ public class TaskMapperContext {
         private WorkflowTask taskToSchedule;
         private Map<String, Object> taskInput;
         private int retryCount;
+        private int iterationCount;
         private String retryTaskId;
         private String taskId;
         private DeciderService deciderService;
@@ -249,6 +263,17 @@ public class TaskMapperContext {
          */
         public Builder withRetryCount(int val) {
             retryCount = val;
+            return this;
+        }
+
+        /**
+         * Sets the {@code iterationCount} and returns a reference to this Builder so that the methods can be chained together.
+         *
+         * @param val the {@code iterationCount} to set
+         * @return a reference to this Builder
+         */
+        public Builder withIterationCount(int val) {
+            iterationCount = val;
             return this;
         }
 

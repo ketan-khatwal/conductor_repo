@@ -68,6 +68,7 @@ public class ForkJoinTaskMapper implements TaskMapper {
         Map<String, Object> taskInput = taskMapperContext.getTaskInput();
         WorkflowModel workflowInstance = taskMapperContext.getWorkflowInstance();
         int retryCount = taskMapperContext.getRetryCount();
+        int iterationCount = taskMapperContext.getIterationCount();
 
         String taskId = taskMapperContext.getTaskId();
 
@@ -86,6 +87,8 @@ public class ForkJoinTaskMapper implements TaskMapper {
         forkTask.setStatus(TaskModel.Status.COMPLETED);
         forkTask.setWorkflowPriority(workflowInstance.getPriority());
         forkTask.setWorkflowTask(taskToSchedule);
+        forkTask.setRetryCount(retryCount);
+        forkTask.setIterationCount(iterationCount);
 
         tasksToBeScheduled.add(forkTask);
         List<List<WorkflowTask>> forkTasks = taskToSchedule.getForkTasks();
@@ -94,7 +97,7 @@ public class ForkJoinTaskMapper implements TaskMapper {
             List<TaskModel> tasks2 =
                     taskMapperContext
                             .getDeciderService()
-                            .getTasksToBeScheduled(workflowInstance, wft, retryCount);
+                            .getTasksToBeScheduled(workflowInstance, wft, retryCount, iterationCount);
             tasksToBeScheduled.addAll(tasks2);
         }
 

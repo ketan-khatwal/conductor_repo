@@ -102,6 +102,9 @@ public @interface WorkflowTaskTypeConstraint {
                 case TaskType.TASK_TYPE_JSON_JQ_TRANSFORM:
                     valid = isJSONJQTransformTaskValid(workflowTask, context);
                     break;
+                case TaskType.TASK_TYPE_GOTO:
+                    valid = isGotoTaskValid(workflowTask, context);
+                    break;
             }
 
             return valid;
@@ -457,6 +460,18 @@ public @interface WorkflowTaskTypeConstraint {
                                 "inputParameters.queryExpression",
                                 TaskType.JSON_JQ_TRANSFORM,
                                 workflowTask.getName());
+                context.buildConstraintViolationWithTemplate(message).addConstraintViolation();
+                valid = false;
+            }
+
+            return valid;
+        }
+        
+        private boolean isGotoTaskValid(WorkflowTask workflowTask, ConstraintValidatorContext context) {
+            boolean valid = true;
+
+            if (workflowTask.getGotoTask() == null || workflowTask.getGotoTask().trim().isEmpty()) {
+                String message = String.format("gotoTask should have a task reference name for taskType: %s taskName: %s", TaskType.GOTO, workflowTask.getName());
                 context.buildConstraintViolationWithTemplate(message).addConstraintViolation();
                 valid = false;
             }

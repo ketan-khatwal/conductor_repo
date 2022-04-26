@@ -67,6 +67,7 @@ public class SimpleTaskMapper implements TaskMapper {
         WorkflowTask taskToSchedule = taskMapperContext.getTaskToSchedule();
         WorkflowModel workflowInstance = taskMapperContext.getWorkflowInstance();
         int retryCount = taskMapperContext.getRetryCount();
+        int iterationCount = taskMapperContext.getIterationCount();
         String retriedTaskId = taskMapperContext.getRetryTaskId();
 
         TaskDef taskDefinition =
@@ -99,6 +100,7 @@ public class SimpleTaskMapper implements TaskMapper {
         simpleTask.setCorrelationId(workflowInstance.getCorrelationId());
         simpleTask.setScheduledTime(System.currentTimeMillis());
         simpleTask.setRetryCount(retryCount);
+        simpleTask.setIterationCount(iterationCount);
         simpleTask.setCallbackAfterSeconds(taskToSchedule.getStartDelay());
         simpleTask.setResponseTimeoutSeconds(taskDefinition.getResponseTimeoutSeconds());
         simpleTask.setWorkflowTask(taskToSchedule);

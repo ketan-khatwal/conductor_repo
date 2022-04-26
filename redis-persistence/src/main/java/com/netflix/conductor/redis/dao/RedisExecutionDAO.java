@@ -144,7 +144,7 @@ public class RedisExecutionDAO extends BaseDynoDAO
 
             recordRedisDaoRequests("createTask", task.getTaskType(), task.getWorkflowType());
 
-            String taskKey = task.getReferenceTaskName() + "" + task.getRetryCount();
+            String taskKey = task.getReferenceTaskName() + "" + task.getRetryCount() + "" + task.getIterationCount();
             Long added =
                     jedisProxy.hset(
                             nsKey(SCHEDULED_TASKS, task.getWorkflowInstanceId()),
@@ -311,7 +311,7 @@ public class RedisExecutionDAO extends BaseDynoDAO
     }
 
     private void removeTaskMappings(TaskModel task) {
-        String taskKey = task.getReferenceTaskName() + "" + task.getRetryCount();
+        String taskKey = task.getReferenceTaskName() + "" + task.getRetryCount() + "" + task.getIterationCount();
 
         jedisProxy.hdel(nsKey(SCHEDULED_TASKS, task.getWorkflowInstanceId()), taskKey);
         jedisProxy.srem(nsKey(IN_PROGRESS_TASKS, task.getTaskDefName()), task.getTaskId());
@@ -321,7 +321,7 @@ public class RedisExecutionDAO extends BaseDynoDAO
     }
 
     private void removeTaskMappingsWithExpiry(TaskModel task) {
-        String taskKey = task.getReferenceTaskName() + "" + task.getRetryCount();
+        String taskKey = task.getReferenceTaskName() + "" + task.getRetryCount() + "" + task.getIterationCount();
 
         jedisProxy.hdel(nsKey(SCHEDULED_TASKS, task.getWorkflowInstanceId()), taskKey);
         jedisProxy.srem(nsKey(IN_PROGRESS_TASKS, task.getTaskDefName()), task.getTaskId());

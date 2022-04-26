@@ -110,9 +110,9 @@ public class ForkJoinTaskMapperTest {
         TaskModel task3 = new TaskModel();
         task3.setReferenceTaskName(wft3.getTaskReferenceName());
 
-        Mockito.when(deciderService.getTasksToBeScheduled(workflow, wft1, 0))
+        Mockito.when(deciderService.getTasksToBeScheduled(workflow, wft1, 0, 0))
                 .thenReturn(Collections.singletonList(task1));
-        Mockito.when(deciderService.getTasksToBeScheduled(workflow, wft2, 0))
+        Mockito.when(deciderService.getTasksToBeScheduled(workflow, wft2, 0, 0))
                 .thenReturn(Collections.singletonList(task3));
 
         String taskId = IDGenerator.generate();
@@ -191,9 +191,9 @@ public class ForkJoinTaskMapperTest {
         TaskModel task3 = new TaskModel();
         task3.setReferenceTaskName(wft3.getTaskReferenceName());
 
-        Mockito.when(deciderService.getTasksToBeScheduled(workflow, wft1, 0))
+        Mockito.when(deciderService.getTasksToBeScheduled(workflow, wft1, 0, 0))
                 .thenReturn(Collections.singletonList(task1));
-        Mockito.when(deciderService.getTasksToBeScheduled(workflow, wft2, 0))
+        Mockito.when(deciderService.getTasksToBeScheduled(workflow, wft2, 0, 0))
                 .thenReturn(Collections.singletonList(task3));
 
         String taskId = IDGenerator.generate();

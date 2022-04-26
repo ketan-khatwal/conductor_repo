@@ -73,6 +73,7 @@ public class HTTPTaskMapper implements TaskMapper {
         WorkflowModel workflowInstance = taskMapperContext.getWorkflowInstance();
         String taskId = taskMapperContext.getTaskId();
         int retryCount = taskMapperContext.getRetryCount();
+        int iterationCount = taskMapperContext.getIterationCount();
 
         TaskDef taskDefinition =
                 Optional.ofNullable(taskMapperContext.getTaskDefinition())
@@ -99,6 +100,7 @@ public class HTTPTaskMapper implements TaskMapper {
         httpTask.getInputData().put("asyncComplete", asynComplete);
         httpTask.setStatus(TaskModel.Status.SCHEDULED);
         httpTask.setRetryCount(retryCount);
+        httpTask.setIterationCount(iterationCount);
         httpTask.setCallbackAfterSeconds(taskToSchedule.getStartDelay());
         httpTask.setWorkflowTask(taskToSchedule);
         httpTask.setWorkflowPriority(workflowInstance.getPriority());

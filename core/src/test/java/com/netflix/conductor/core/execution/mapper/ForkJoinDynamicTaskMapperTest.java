@@ -135,9 +135,9 @@ public class ForkJoinDynamicTaskMapperTest {
         TaskModel simpleTask2 = new TaskModel();
         simpleTask2.setReferenceTaskName("xdt2");
 
-        when(deciderService.getTasksToBeScheduled(workflowInstance, wt2, 0))
+        when(deciderService.getTasksToBeScheduled(workflowInstance, wt2, 0, 0))
                 .thenReturn(Collections.singletonList(simpleTask1));
-        when(deciderService.getTasksToBeScheduled(workflowInstance, wt3, 0))
+        when(deciderService.getTasksToBeScheduled(workflowInstance, wt3, 0, 0))
                 .thenReturn(Collections.singletonList(simpleTask2));
 
         String taskId = IDGenerator.generate();
@@ -219,9 +219,9 @@ public class ForkJoinDynamicTaskMapperTest {
         TaskModel simpleTask2 = new TaskModel();
         simpleTask2.setReferenceTaskName("xdt2");
 
-        when(deciderService.getTasksToBeScheduled(workflowInstance, wt2, 0))
+        when(deciderService.getTasksToBeScheduled(workflowInstance, wt2, 0, 0))
                 .thenReturn(Collections.singletonList(simpleTask1));
-        when(deciderService.getTasksToBeScheduled(workflowInstance, wt3, 0))
+        when(deciderService.getTasksToBeScheduled(workflowInstance, wt3, 0, 0))
                 .thenReturn(Collections.singletonList(simpleTask2));
 
         String taskId = IDGenerator.generate();
@@ -485,7 +485,7 @@ public class ForkJoinDynamicTaskMapperTest {
         simpleTask1.setReferenceTaskName("xdt1");
 
         // Empty list, this is a bad state, workflow should terminate
-        when(deciderService.getTasksToBeScheduled(workflowInstance, wt2, 0))
+        when(deciderService.getTasksToBeScheduled(workflowInstance, wt2, 0, 0))
                 .thenReturn(Lists.newArrayList());
 
         String taskId = IDGenerator.generate();

@@ -145,6 +145,9 @@ public class WorkflowTask {
     @ProtoField(id = 28)
     private String expression;
 
+    @ProtoField(id = 29)
+    private String gotoTask;
+
     /** @return the name */
     public String getName() {
         return name;
@@ -154,6 +157,21 @@ public class WorkflowTask {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * @return reference name of target Goto task
+     */
+    public String getGotoTask() {
+        return gotoTask;
+    }
+
+    /**
+     * @param gotoTask target Goto Task's reference name
+     */
+    public void setGotoTask(String gotoTask) {
+        this.gotoTask = gotoTask;
+    }
+
 
     /** @return the taskReferenceName */
     public String getTaskReferenceName() {
@@ -649,7 +667,8 @@ public class WorkflowTask {
                 && Objects.equals(getSink(), that.getSink())
                 && Objects.equals(isAsyncComplete(), that.isAsyncComplete())
                 && Objects.equals(getDefaultExclusiveJoinTask(), that.getDefaultExclusiveJoinTask())
-                && Objects.equals(getRetryCount(), that.getRetryCount());
+                && Objects.equals(getRetryCount(), that.getRetryCount())
+                && Objects.equals(getGotoTask(), that.getGotoTask());
     }
 
     @Override
@@ -679,6 +698,7 @@ public class WorkflowTask {
                 isAsyncComplete(),
                 isOptional(),
                 getDefaultExclusiveJoinTask(),
-                getRetryCount());
+                getRetryCount(),
+                getGotoTask());
     }
 }

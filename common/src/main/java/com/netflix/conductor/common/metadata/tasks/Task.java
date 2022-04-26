@@ -202,6 +202,9 @@ public class Task {
     @ProtoField(id = 42)
     private boolean subworkflowChanged;
 
+    @ProtoField(id = 43)
+    private int iterationCount;
+
     public Task() {}
 
     /**
@@ -335,6 +338,20 @@ public class Task {
     /** @param updateTime the updateTime to set */
     public void setUpdateTime(long updateTime) {
         this.updateTime = updateTime;
+    }
+
+    /**
+     * @return the iterationCount
+     */
+    public int getIterationCount() {
+        return iterationCount;
+    }
+
+    /**
+     * @param iterationCount the iterationCount to set
+     */
+    public void setIterationCount(int iterationCount) {
+        this.iterationCount = iterationCount;
     }
 
     /** @return the queueWaitTime */
@@ -684,6 +701,7 @@ public class Task {
         copy.setIsolationGroupId(isolationGroupId);
         copy.setSubWorkflowId(getSubWorkflowId());
         copy.setSubworkflowChanged(subworkflowChanged);
+        copy.setIterationCount(iterationCount);
 
         return copy;
     }
@@ -806,6 +824,9 @@ public class Task {
                 + ", subworkflowChanged='"
                 + subworkflowChanged
                 + '\''
+                + ", iterationCount='"
+                + iterationCount
+                + '\''
                 + '}';
     }
 
@@ -819,6 +840,7 @@ public class Task {
         }
         Task task = (Task) o;
         return getRetryCount() == task.getRetryCount()
+                && getIterationCount() == task.getIterationCount()
                 && getSeq() == task.getSeq()
                 && getPollCount() == task.getPollCount()
                 && getScheduledTime() == task.getScheduledTime()
@@ -901,6 +923,7 @@ public class Task {
                 getExternalInputPayloadStoragePath(),
                 getExternalOutputPayloadStoragePath(),
                 getIsolationGroupId(),
-                getExecutionNameSpace());
+                getExecutionNameSpace(),
+                getIterationCount());
     }
 }

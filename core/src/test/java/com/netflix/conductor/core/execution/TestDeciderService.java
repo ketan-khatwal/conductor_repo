@@ -960,7 +960,7 @@ public class TestDeciderService {
         workflowTask1.setTaskDefinition(new TaskDef("s1"));
 
         List<TaskModel> tasksToBeScheduled =
-                deciderService.getTasksToBeScheduled(workflow, workflowTask1, 0, null);
+                deciderService.getTasksToBeScheduled(workflow, workflowTask1, 0, null, 0);
         assertNotNull(tasksToBeScheduled);
         assertEquals(1, tasksToBeScheduled.size());
         assertEquals("s1", tasksToBeScheduled.get(0).getReferenceTaskName());
@@ -970,7 +970,7 @@ public class TestDeciderService {
         workflowTask2.setTaskReferenceName("s2");
         workflowTask2.setType(SIMPLE.name());
         workflowTask2.setTaskDefinition(new TaskDef("s2"));
-        tasksToBeScheduled = deciderService.getTasksToBeScheduled(workflow, workflowTask2, 0, null);
+        tasksToBeScheduled = deciderService.getTasksToBeScheduled(workflow, workflowTask2, 0, null, 0);
         assertNotNull(tasksToBeScheduled);
         assertEquals(1, tasksToBeScheduled.size());
         assertEquals("s2", tasksToBeScheduled.get(0).getReferenceTaskName());

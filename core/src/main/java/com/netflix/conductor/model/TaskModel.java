@@ -149,6 +149,8 @@ public class TaskModel {
 
     private String subWorkflowId;
 
+    private int iterationCount;
+
     /**
      * Used to note that a sub workflow associated with SUB_WORKFLOW task has an action performed on
      * it directly.
@@ -472,6 +474,14 @@ public class TaskModel {
         this.iteration = iteration;
     }
 
+    public int getIterationCount() {
+        return iterationCount;
+    }
+
+    public void setIterationCount(int iterationCount) {
+        this.iterationCount = iterationCount;
+    }
+
     public String getSubWorkflowId() {
         // For backwards compatibility
         if (StringUtils.isNotBlank(subWorkflowId)) {
@@ -657,6 +667,9 @@ public class TaskModel {
                 + '\''
                 + ", subworkflowChanged="
                 + subworkflowChanged
+                + '\''
+                +", iterationCount="
+                + iterationCount +
                 + '}';
     }
 
@@ -667,6 +680,7 @@ public class TaskModel {
         TaskModel taskModel = (TaskModel) o;
         return getRetryCount() == taskModel.getRetryCount()
                 && getSeq() == taskModel.getSeq()
+                && getIterationCount() == taskModel.getIterationCount()
                 && getPollCount() == taskModel.getPollCount()
                 && getScheduledTime() == taskModel.getScheduledTime()
                 && getStartTime() == taskModel.getStartTime()
@@ -753,7 +767,8 @@ public class TaskModel {
                 getIsolationGroupId(),
                 getIteration(),
                 getSubWorkflowId(),
-                isSubworkflowChanged());
+                isSubworkflowChanged(),
+                getIterationCount());
     }
 
     public Task toTask() {

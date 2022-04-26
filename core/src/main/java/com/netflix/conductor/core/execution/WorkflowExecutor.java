@@ -1450,7 +1450,7 @@ public class WorkflowExecutor {
     List<TaskModel> dedupAndAddTasks(WorkflowModel workflow, List<TaskModel> tasks) {
         List<String> tasksInWorkflow =
                 workflow.getTasks().stream()
-                        .map(task -> task.getReferenceTaskName() + "_" + task.getRetryCount())
+                        .map(task -> task.getReferenceTaskName() + "_" + task.getRetryCount() + "_" + task.getIterationCount())
                         .collect(Collectors.toList());
 
         List<TaskModel> dedupedTasks =
@@ -1460,7 +1460,9 @@ public class WorkflowExecutor {
                                         !tasksInWorkflow.contains(
                                                 task.getReferenceTaskName()
                                                         + "_"
-                                                        + task.getRetryCount()))
+                                                        + task.getRetryCount()
+                                                        + "_"
+                                                        + task.getIterationCount()))
                         .collect(Collectors.toList());
 
         workflow.getTasks().addAll(dedupedTasks);
@@ -1954,7 +1956,7 @@ public class WorkflowExecutor {
                         workflow,
                         loopTask.getWorkflowTask().getLoopOver().get(0),
                         loopTask.getRetryCount(),
-                        null);
+                        null, 0);
         setTaskDomains(scheduledLoopOverTasks, workflow);
         scheduledLoopOverTasks.forEach(
                 t -> {

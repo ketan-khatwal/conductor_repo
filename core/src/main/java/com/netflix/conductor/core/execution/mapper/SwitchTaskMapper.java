@@ -129,7 +129,8 @@ public class SwitchTaskMapper implements TaskMapper {
                                     workflowInstance,
                                     selectedTask,
                                     retryCount,
-                                    taskMapperContext.getRetryTaskId());
+                                    taskMapperContext.getRetryTaskId(),
+                                    0);
             tasksToBeScheduled.addAll(caseTasks);
             switchTask.getInputData().put("hasChildren", "true");
         }

@@ -122,6 +122,7 @@ public class ForkJoinDynamicTaskMapper implements TaskMapper {
         WorkflowModel workflowInstance = taskMapperContext.getWorkflowInstance();
         String taskId = taskMapperContext.getTaskId();
         int retryCount = taskMapperContext.getRetryCount();
+        int iterationCount = taskMapperContext.getIterationCount();
 
         List<TaskModel> mappedTasks = new LinkedList<>();
         // Get the list of dynamic tasks and the input for the tasks
@@ -156,7 +157,7 @@ public class ForkJoinDynamicTaskMapper implements TaskMapper {
             List<TaskModel> forkedTasks =
                     taskMapperContext
                             .getDeciderService()
-                            .getTasksToBeScheduled(workflowInstance, dynForkTask, retryCount);
+                            .getTasksToBeScheduled(workflowInstance, dynForkTask, retryCount, iterationCount);
 
             // It's an error state if no forkedTasks can be decided upon. In the cases where we've
             // seen

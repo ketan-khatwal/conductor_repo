@@ -571,6 +571,7 @@ public abstract class AbstractProtoMapper {
             to.setSubWorkflowId( from.getSubWorkflowId() );
         }
         to.setSubworkflowChanged( from.isSubworkflowChanged() );
+        to.setIterationCount( from.getIterationCount() );
         return to.build();
     }
 
@@ -630,6 +631,7 @@ public abstract class AbstractProtoMapper {
         to.setIteration( from.getIteration() );
         to.setSubWorkflowId( from.getSubWorkflowId() );
         to.setSubworkflowChanged( from.getSubworkflowChanged() );
+        to.setIterationCount( from.getIterationCount() );
         return to;
     }
 
@@ -1321,6 +1323,9 @@ public abstract class AbstractProtoMapper {
         if (from.getExpression() != null) {
             to.setExpression( from.getExpression() );
         }
+        if (from.getGotoTask() != null) {
+            to.setGotoTask( from.getGotoTask() );
+        }
         return to.build();
     }
 
@@ -1366,6 +1371,7 @@ public abstract class AbstractProtoMapper {
         to.setRetryCount( from.getRetryCount() );
         to.setEvaluatorType( from.getEvaluatorType() );
         to.setExpression( from.getExpression() );
+        to.setGotoTask( from.getGotoTask() );
         return to;
     }
 
