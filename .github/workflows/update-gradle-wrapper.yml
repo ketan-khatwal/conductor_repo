@@ -15,4 +15,4 @@ jobs:
         with:
           java-version: 1.8
       - name: Update Gradle Wrapper
-        uses: gradle-update/update-gradle-wrapper-action@v1
+        uses: gradle-update/update-gradle-wrapper-action@v2
